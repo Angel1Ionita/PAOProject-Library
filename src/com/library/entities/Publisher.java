@@ -1,15 +1,15 @@
-package com.library.Entities;
+package com.library.entities;
 
-public class Category {
+public class Publisher {
     private int id;
     private String name;
 
-    public Category() {
-    }
-
-    public Category(int id, String name) {
+    public Publisher(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Publisher() {
     }
 
     public int getId() {
@@ -30,9 +30,9 @@ public class Category {
 
     @Override
     public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+        return "Publisher{" +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
                 '}';
     }
 }

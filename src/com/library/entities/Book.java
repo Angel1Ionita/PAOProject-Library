@@ -1,4 +1,6 @@
-package com.library.Entities;
+package com.library.entities;
+
+import com.library.enums.Category;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -65,11 +67,11 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-                "isbn=" + isbn +
-                ", title='" + title + '\'' +
-                ", publicationDate=" + publicationDate +
-                ", authors=" + authors +
-                ", categories=" + categories +
+                "isbn=" + getIsbn() +
+                ", title='" + getTitle() + '\'' +
+                ", publicationDate=" + getPublicationDate() +
+                ", authors=" + getAuthors() +
+                ", categories=" + getCategories() +
                 '}';
     }
 }

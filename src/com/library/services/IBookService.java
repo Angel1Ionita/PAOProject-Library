@@ -1,6 +1,6 @@
-package com.library.Services;
+package com.library.services;
 
-import com.library.Entities.Book;
+import com.library.entities.Book;
 
 public interface IBookService {
     String getAllBooks();

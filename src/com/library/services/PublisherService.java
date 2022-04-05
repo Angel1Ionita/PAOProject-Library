@@ -1,6 +1,6 @@
-package com.library.Services;
+package com.library.services;
 
-import com.library.Entities.Publisher;
+import com.library.entities.Publisher;
 
 import static com.library.Database.publishers;
 

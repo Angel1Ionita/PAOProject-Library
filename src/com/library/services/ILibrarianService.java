@@ -1,6 +1,6 @@
-package com.library.Services;
+package com.library.services;
 
-import com.library.Entities.Librarian;
+import com.library.entities.Librarian;
 
 public interface ILibrarianService {
     String getAllLibrarians();
@@ -11,10 +11,16 @@ public interface ILibrarianService {
 
     void updateLibrarian(Librarian l);
 
+    void updateSalaryBonus(Librarian l);
+
+    void updateAllSalaryBonuses();
+
     void deleteLibrarian(int id);
 
     void promoteLibrarian(int id);
 
     void demoteLibrarian(int id);
+
+
 
 }

@@ -1,4 +1,4 @@
-package com.library.Entities;
+package com.library.entities;
 
 public class Address {
     private int id;
@@ -6,6 +6,17 @@ public class Address {
     private String postalCode;
     private String street;
     private String details;
+
+    public Address(int id, String country, String postalCode, String street, String details) {
+        this.id = id;
+        this.country = country;
+        this.postalCode = postalCode;
+        this.street = street;
+        this.details = details;
+    }
+
+    public Address() {
+    }
 
     public int getId() {
         return id;
@@ -47,25 +58,14 @@ public class Address {
         this.details = details;
     }
 
-    public Address(int id, String country, String postalCode, String street, String details) {
-        this.id = id;
-        this.country = country;
-        this.postalCode = postalCode;
-        this.street = street;
-        this.details = details;
-    }
-
-    public Address() {
-    }
-
     @Override
     public String toString() {
         return "Address{" +
-                "id=" + id +
-                ", country='" + country + '\'' +
-                ", postalCode='" + postalCode + '\'' +
-                ", street='" + street + '\'' +
-                ", details='" + details + '\'' +
+                "id=" + getId() +
+                ", country='" + getCountry() + '\'' +
+                ", postalCode='" + getPostalCode() + '\'' +
+                ", street='" + getStreet() + '\'' +
+                ", details='" + getDetails() + '\'' +
                 '}';
     }
 }

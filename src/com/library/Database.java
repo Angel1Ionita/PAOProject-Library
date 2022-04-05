@@ -1,6 +1,6 @@
 package com.library;
 
-import com.library.Entities.*;
+import com.library.entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,6 @@ public class Database {
     public static List<Author> authors = new ArrayList<>();
     public static List<Book> books = new ArrayList<>();
     public static List<Request> requests = new ArrayList<>();
-    public static List<Category> categories = new ArrayList<>();
     public static List<Publisher> publishers = new ArrayList<>();
     public static List<Member> members = new ArrayList<>();
     public static List<Staff> staff = new ArrayList<>();

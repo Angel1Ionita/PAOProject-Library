@@ -1,6 +1,6 @@
-package com.library.Services;
+package com.library.services;
 
-import com.library.Entities.Address;
+import com.library.entities.Address;
 
 public interface IAddressService {
     String getAllAdresses();

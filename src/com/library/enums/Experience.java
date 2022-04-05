@@ -1,4 +1,4 @@
-package com.library.Enums;
+package com.library.enums;
 
 public enum Experience {
     STARTER,INTERMEDIATE,EXPERIENCED

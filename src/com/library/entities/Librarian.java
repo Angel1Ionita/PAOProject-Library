@@ -1,6 +1,6 @@
-package com.library.Entities;
+package com.library.entities;
 
-import com.library.Enums.Experience;
+import com.library.enums.Experience;
 
 import java.time.LocalDate;
 
@@ -11,17 +11,6 @@ public class Librarian extends Staff {
     public Librarian(int id, String firstName, String lastName, String phone, double salary, LocalDate hireDate, Experience experience) {
         super(id, firstName, lastName, phone, salary, hireDate);
         this.experience = experience;
-        switch (experience) {
-            case STARTER:
-                this.salaryBonus = 0;
-                break;
-            case INTERMEDIATE:
-                this.salaryBonus = 0.33;
-                break;
-            case EXPERIENCED:
-                this.salaryBonus = 0.66;
-                break;
-        }
     }
 
     public Librarian() {
@@ -35,6 +24,14 @@ public class Librarian extends Staff {
         this.experience = experience;
     }
 
+    public double getSalaryBonus() {
+        return salaryBonus;
+    }
+
+    public void setSalaryBonus(double salaryBonus) {
+        this.salaryBonus = salaryBonus;
+    }
+
     @Override
     public String toString() {
         return "Librarian{" +
@@ -44,11 +41,10 @@ public class Librarian extends Staff {
                 ", phone='" + super.getPhone() + '\'' +
                 ", salary=" + super.getSalary() +
                 ", hireDate=" + super.getHireDate() +
-                ", experience=" + experience +
+                ", experience=" + getExperience() +
+                ", salaryBonus=" + getSalaryBonus() +
                 '}';
     }
 
-    public double getSalaryBonus() {
-        return salaryBonus;
-    }
+
 }

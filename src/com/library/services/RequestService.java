@@ -1,6 +1,6 @@
-package com.library.Services;
+package com.library.services;
 
-import com.library.Entities.Request;
+import com.library.entities.Request;
 
 import static com.library.Database.requests;
 

@@ -1,6 +1,6 @@
-package com.library.Services;
+package com.library.services;
 
-import com.library.Entities.Member;
+import com.library.entities.Member;
 
 import static com.library.Database.members;
 

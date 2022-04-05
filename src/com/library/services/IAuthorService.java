@@ -1,6 +1,6 @@
-package com.library.Services;
+package com.library.services;
 
-import com.library.Entities.Author;
+import com.library.entities.Author;
 
 public interface IAuthorService {
     String getAllAuthors();

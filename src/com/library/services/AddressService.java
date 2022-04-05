@@ -1,6 +1,6 @@
-package com.library.Services;
+package com.library.services;
 
-import com.library.Entities.Address;
+import com.library.entities.Address;
 
 import static com.library.Database.addresses;
 

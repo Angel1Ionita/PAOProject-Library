@@ -1,6 +1,6 @@
-package com.library.Services;
+package com.library.services;
 
-import com.library.Entities.Staff;
+import com.library.entities.Staff;
 
 import static com.library.Database.staff;
 

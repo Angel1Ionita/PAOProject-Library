@@ -1,4 +1,4 @@
-package com.library.Entities;
+package com.library.entities;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -9,6 +9,17 @@ public class Request {
     private List<Book> books;
     private LocalDate borrowingDate;
     private LocalDate returnDate;
+
+    public Request(int id, Member member, List<Book> books, LocalDate borrowingDate, LocalDate returnDate) {
+        this.id = id;
+        this.member = member;
+        this.books = books;
+        this.borrowingDate = borrowingDate;
+        this.returnDate = returnDate;
+    }
+
+    public Request() {
+    }
 
     public int getId() {
         return id;
@@ -50,25 +61,14 @@ public class Request {
         this.returnDate = returnDate;
     }
 
-    public Request() {
-    }
-
-    public Request(int id, Member member, List<Book> books, LocalDate borrowingDate, LocalDate returnDate) {
-        this.id = id;
-        this.member = member;
-        this.books = books;
-        this.borrowingDate = borrowingDate;
-        this.returnDate = returnDate;
-    }
-
     @Override
     public String toString() {
         return "Request{" +
-                "id=" + id +
-                ", member=" + member +
-                ", books=" + books +
-                ", borrowingDate=" + borrowingDate +
-                ", returnDate=" + returnDate +
+                "id=" + getId() +
+                ", member=" + getMember() +
+                ", books=" + getBooks() +
+                ", borrowingDate=" + getBorrowingDate() +
+                ", returnDate=" + getReturnDate() +
                 '}';
     }
 }
