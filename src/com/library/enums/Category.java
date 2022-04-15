@@ -1,0 +1,5 @@
+package com.library.enums;
+
+public enum Category {
+    LITERATURE,HISTORY,SCIENCE,GEOGRAPHY,RELIGION,MUSIC,TECHNOLOGY,ARTS,MYTHOLOGY,FINANCE
+}
