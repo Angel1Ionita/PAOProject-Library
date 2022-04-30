@@ -8,6 +8,11 @@ import static com.library.Database.books;
 
 
 public class BookService implements IBookService {
+    private static BookService instance = null;
+
+    private BookService() {
+    }
+
     @Override
     public String getAllBooks() {
         return books.toString();
@@ -55,5 +60,14 @@ public class BookService implements IBookService {
         str.append(books.get(books.size() - 1).getTitle());
         str.append("]");
         return str.toString();
+    }
+
+    public static BookService getInstance() {
+        {
+            if (instance == null)
+                instance = new BookService();
+
+            return instance;
+        }
     }
 }

@@ -5,6 +5,10 @@ import com.library.entities.Publisher;
 import static com.library.Database.publishers;
 
 public class PublisherService implements IPublisherService {
+    private static PublisherService instance = null;
+
+    private PublisherService() {
+    }
 
     @Override
     public String getAllPublishers() {
@@ -27,5 +31,14 @@ public class PublisherService implements IPublisherService {
                 break;
             }
 
+    }
+
+    public static PublisherService getInstance() {
+        {
+            if (instance == null)
+                instance = new PublisherService();
+
+            return instance;
+        }
     }
 }
