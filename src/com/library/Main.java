@@ -26,29 +26,24 @@ public class Main {
 
         //Calls to services
 
-        //Create a new Librarian
-        Librarian l1 = new Librarian(1, "Maria", "Andreescu", "0731394051", 1065.6, LocalDate.parse("2010-08-11"), Experience.INTERMEDIATE);
-        librarianService.updateSalaryBonus(l1);
-        librarianService.addLibrarian(l1);
+        librarianService.updateAllSalaryBonuses();
         System.out.println(Database.librarians.toString());
-
-        System.out.println("Librarian l1 before promotion:");
+        System.out.println("Librarian 1 before promotion:");
         System.out.println(librarianService.getLibrarianById(1));
         librarianService.promoteLibrarian(1);
-        System.out.println("Librarian l1 after promotion:");
+        System.out.println("Librarian 1 after promotion:");
         System.out.println(librarianService.getLibrarianById(1));
         System.out.println("List of librarians:");
         System.out.println(librarianService.getAllLibrarians());
 
-        addressService.addAddress(new Address(2, "2", "3", "4", "5"));
-        System.out.println(addressService.getAllAdresses());
+        addressService.addAddress(new Address(2, "Romania", "041946", "Victoriei nr 5", "Bloc A5 ap.24"));
+        authorService.addAuthor(new Author(1,"Ion","Creanga"));
+        staffService.updateStaff(new Staff(1, "Maria", "Hristache", "0741386051", 1000.1, LocalDate.parse("2012-01-08"))); //updates staff member with id 1
+
+        System.out.println(addressService.getAllAdresses());  //display all addresses
+        System.out.println(staffService.getAllStaff());       //display all staff
+        System.out.println(authorService.getAllAuthors());    //display all authors
         //If it doesn't already exist, a new Audit.csv file will be generated at "src/com/library/Database"
-
-        /*
-        Note: File IO (except for Audit) is a little bugged right now, not sure what causes the issue.
-        Delete the contents of Librarian.csv if issues with running the application appear.
-         */
-
 
     }
 }
