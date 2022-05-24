@@ -12,8 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Read {
-    private static final String mainPath = "src/com/library/database/";
-    public static BufferedReader addressesReader,authorsReader,librariansReader,staffReader;
+    private static final String mainPath = "src/main/java/com/library/database/";
+    public static BufferedReader addressesReader, authorsReader, librariansReader, staffReader;
+
+    private Read() {
+    }
 
     static {
         try {
@@ -38,7 +41,8 @@ public class Read {
             return (T) new Staff(Integer.parseInt(line[0]), line[1], line[2], line[3], Double.parseDouble(line[4]), LocalDate.parse(line[5]));
         return null;
     }
-    public static <T> List<T> read(Class<T> tclass,BufferedReader buffer) throws IOException {
+
+    public static <T> List<T> read(Class<T> tclass, BufferedReader buffer) throws IOException {
         List<T> records = new ArrayList<>();
         String line;
         buffer.readLine();
