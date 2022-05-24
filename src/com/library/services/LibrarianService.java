@@ -1,5 +1,7 @@
 package com.library.services;
 
+import com.library.io.Audit;
+import com.library.io.Write;
 import com.library.entities.Librarian;
 import com.library.enums.Experience;
 
@@ -7,8 +9,14 @@ import static com.library.Database.librarians;
 import static com.library.enums.Experience.*;
 
 public class LibrarianService implements ILibrarianService {
+    private static LibrarianService instance = null;
+
+    private LibrarianService() {
+    }
+
     @Override
     public String getAllLibrarians() {
+        Audit.logFunctionCall("getAllLibrarians");
         return librarians.toString();
     }
 
@@ -17,19 +25,26 @@ public class LibrarianService implements ILibrarianService {
         for (Librarian l : librarians)
             if (l.getId() == id)
                 return l.toString();
+        Audit.logFunctionCall("getLibrarianById");
         return "No librarians found with the given id";
     }
 
     @Override
     public void addLibrarian(Librarian l) {
         librarians.add(l);
+        Write.toCSVFile(librarians, Librarian.class, Write.librariansWriter);
+        Audit.logFunctionCall("addLibrarian");
     }
 
     @Override
     public void updateLibrarian(Librarian l) {
         for (int i = 0; i < librarians.size(); i++)
-            if (librarians.get(i).getId() == l.getId())
+            if (librarians.get(i).getId() == l.getId()) {
                 librarians.set(i, l);
+                break;
+            }
+        Write.toCSVFile(librarians, Librarian.class, Write.librariansWriter);
+        Audit.logFunctionCall("updateLibrarian");
     }
 
     @Override
@@ -51,7 +66,7 @@ public class LibrarianService implements ILibrarianService {
 
     @Override
     public void updateAllSalaryBonuses() {
-        for(Librarian l:librarians)
+        for (Librarian l : librarians)
             updateSalaryBonus(l);
     }
 
@@ -66,6 +81,8 @@ public class LibrarianService implements ILibrarianService {
                 updateSalaryBonus(l);
                 break;
             }
+        Write.toCSVFile(librarians, Librarian.class, Write.librariansWriter);
+        Audit.logFunctionCall("promoteLibrarian");
 
     }
 
@@ -80,13 +97,26 @@ public class LibrarianService implements ILibrarianService {
                 updateSalaryBonus(l);
                 break;
             }
+        Audit.logFunctionCall("demoteLibrarian");
     }
 
     @Override
     public void deleteLibrarian(int id) {
         for (Librarian l : librarians)
-            if (l.getId() == id)
+            if (l.getId() == id) {
                 librarians.remove(l);
+                break;
+            }
+        Write.toCSVFile(librarians, Librarian.class, Write.librariansWriter);
+        Audit.logFunctionCall("deleteLibrarian");
+    }
 
+    public static LibrarianService getInstance() {
+        {
+            if (instance == null)
+                instance = new LibrarianService();
+
+            return instance;
+        }
     }
 }

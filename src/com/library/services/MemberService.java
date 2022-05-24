@@ -5,6 +5,10 @@ import com.library.entities.Member;
 import static com.library.Database.members;
 
 public class MemberService implements IMemberService {
+    private static MemberService instance = null;
+
+    private MemberService() {
+    }
 
     @Override
     public String getAllMembers() {
@@ -42,6 +46,15 @@ public class MemberService implements IMemberService {
                 members.remove(m);
                 break;
             }
+        }
+    }
+
+    public static MemberService getInstance() {
+        {
+            if (instance == null)
+                instance = new MemberService();
+
+            return instance;
         }
     }
 }

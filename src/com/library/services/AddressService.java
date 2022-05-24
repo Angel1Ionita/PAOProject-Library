@@ -1,13 +1,20 @@
 package com.library.services;
 
+import com.library.io.Audit;
+import com.library.io.Write;
 import com.library.entities.Address;
 
 import static com.library.Database.addresses;
 
 public class AddressService implements IAddressService {
+    private static AddressService instance = null;
+
+    private AddressService() {
+    }
 
     @Override
     public String getAllAdresses() {
+        Audit.logFunctionCall("getAllAddresses");
         return addresses.toString();
     }
 
@@ -17,12 +24,15 @@ public class AddressService implements IAddressService {
             if (a.getId() == id)
                 return a.toString();
         }
+        Audit.logFunctionCall("getAddressById");
         return "No adddress found with the given id";
     }
 
     @Override
     public void addAddress(Address a) {
         addresses.add(a);
+        Write.toCSVFile(addresses,Address.class,Write.addressesWriter);
+        Audit.logFunctionCall("addAddress");
     }
 
     @Override
@@ -32,6 +42,8 @@ public class AddressService implements IAddressService {
                 addresses.set(i, a);
                 break;
             }
+        Write.toCSVFile(addresses,Address.class,Write.addressesWriter);
+        Audit.logFunctionCall("updateAddress");
     }
 
     @Override
@@ -42,6 +54,17 @@ public class AddressService implements IAddressService {
                 break;
             }
         }
+        Write.toCSVFile(addresses,Address.class,Write.addressesWriter);
+        Audit.logFunctionCall("deleteAddress");
 
+    }
+
+    public static AddressService getInstance() {
+        {
+            if (instance == null)
+                instance = new AddressService();
+
+            return instance;
+        }
     }
 }

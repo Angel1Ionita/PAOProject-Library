@@ -5,6 +5,10 @@ import com.library.entities.Request;
 import static com.library.Database.requests;
 
 public class RequestService implements IRequestService {
+    private static RequestService instance = null;
+
+    private RequestService() {
+    }
 
     @Override
     public String getAllRequests() {
@@ -29,5 +33,14 @@ public class RequestService implements IRequestService {
         for (Request r : requests)
             if (r.getId() == id)
                 requests.remove(r);
+    }
+
+    public static RequestService getInstance() {
+        {
+            if (instance == null)
+                instance = new RequestService();
+
+            return instance;
+        }
     }
 }
