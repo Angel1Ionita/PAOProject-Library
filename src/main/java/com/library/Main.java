@@ -53,7 +53,7 @@ public class Main {
         AddressRepository.addAddress(new Address(0,"Romania","012345","Strada Soarelui nr.5","-")); //id doesn't matter here because it gets auto generated
         AddressRepository.updateAddress(new Address(2,"Bulgaria","123456","Strada Soarelui nr.6","Bloc A5"));
 
-        System.out.println(AddressRepository.getAllAddresses());
+        System.out.println(AddressRepository.getAllAddresses()); //display all addresses
         DatabaseConfiguration.closeDatabaseConnection();
 
     }
