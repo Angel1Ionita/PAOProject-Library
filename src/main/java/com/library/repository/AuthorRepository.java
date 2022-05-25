@@ -1,7 +1,6 @@
 package com.library.repository;
 
 import com.library.config.DatabaseConfiguration;
-import com.library.entities.Address;
 import com.library.entities.Author;
 import com.library.io.Audit;
 
@@ -38,19 +37,31 @@ public class AuthorRepository {
         try (PreparedStatement preparedStatement = connection.prepareStatement(selectSql)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            return mapToAuthor(resultSet);
+            if(resultSet.next())
+                return mapToAuthor(resultSet);
+            return null;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    private static Author mapToAuthor(ResultSet resultSet) throws SQLException {
-        if (resultSet.next()) {
-            return new Author(resultSet.getInt(1),
-                    resultSet.getString(2),
-                    resultSet.getString(3));//1 int 2 string-uri
+    public static void addAuthor(Author author) {
+        Audit.logFunctionCall("sql_addAuthor");
+        String insertSql = "INSERT INTO author(firstName, lastName) VALUES(?, ?)";
+        Connection connection = DatabaseConfiguration.getDatabaseConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(insertSql)) {
+            preparedStatement.setString(1, author.getFirstName());
+            preparedStatement.setString(2, author.getLastName());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return null;
+    }
+
+    private static Author mapToAuthor(ResultSet resultSet) throws SQLException {
+        return new Author(resultSet.getInt(1),
+                resultSet.getString(2),
+                resultSet.getString(3));
     }
 }

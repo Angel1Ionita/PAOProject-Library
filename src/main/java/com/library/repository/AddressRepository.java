@@ -38,7 +38,9 @@ public class AddressRepository {
         try (PreparedStatement preparedStatement = connection.prepareStatement(selectSql)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            return mapToAddress(resultSet);
+            if(resultSet.next())
+                return mapToAddress(resultSet);
+            return null;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -46,7 +48,7 @@ public class AddressRepository {
     }
 
     public static void addAddress(Address address) {
-        Audit.logFunctionCall("sql_addAddresses");
+        Audit.logFunctionCall("sql_addAddress");
         String insertSql = "INSERT INTO address(country, postalCode, street, details) VALUES(?, ?, ?, ?)";
         Connection connection = DatabaseConfiguration.getDatabaseConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(insertSql)) {
@@ -89,14 +91,11 @@ public class AddressRepository {
     }
 
     private static Address mapToAddress(ResultSet resultSet) throws SQLException {
-        if (resultSet.next()) {
-            return new Address(resultSet.getInt(1),
-                    resultSet.getString(2),
-                    resultSet.getString(3),
-                    resultSet.getString(4),
-                    resultSet.getString(5));//1 int 4 string-uri
-        }
-        return null;
+        return new Address(resultSet.getInt(1),
+                resultSet.getString(2),
+                resultSet.getString(3),
+                resultSet.getString(4),
+                resultSet.getString(5));
     }
 
 }

@@ -4,9 +4,13 @@ import com.library.config.DatabaseConfiguration;
 import com.library.config.TableCreator;
 import com.library.entities.Address;
 import com.library.entities.Author;
+import com.library.entities.Librarian;
 import com.library.entities.Staff;
+import com.library.enums.Experience;
 import com.library.repository.AddressRepository;
 import com.library.repository.AuthorRepository;
+import com.library.repository.LibrarianRepository;
+import com.library.repository.StaffRepository;
 import com.library.services.*;
 
 import java.sql.*;
@@ -14,7 +18,7 @@ import java.time.LocalDate;
 
 public class Main {
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
 
         //Initializing services
         IAddressService addressService = AddressService.getInstance();
@@ -48,12 +52,35 @@ public class Main {
         //If it doesn't already exist, a new Audit.csv file will be generated at "src/main/java/com/library/Database"
 
         TableCreator.createTables();
-        System.out.println(AuthorRepository.getAllAuthors());   //returns a list of all authors retrieved from database or an empty list if there are none
-        System.out.println(AuthorRepository.getAuthorById(1));  //returns the author with the given id retrieved from dababase or null if the id doesn't exist
-        AddressRepository.addAddress(new Address(0,"Romania","012345","Strada Soarelui nr.5","-")); //id doesn't matter here because it gets auto generated
+
+        //When adding new entries, id value doesn't matter because it gets auto-generated
+        AuthorRepository.addAuthor(new Author(0,"Ion","Creanga"));
+        LibrarianRepository.addLibrarian(new Librarian(0,"Andreea","Marina","0741234567",1000,LocalDate.parse("2002-02-12"), Experience.INTERMEDIATE));
+        StaffRepository.addStaff(new Staff(0, "Andreea", "Ioana", "0741234789", 900, LocalDate.parse("2003-03-12")));
+
+        System.out.println("All authors in the database:");
+        System.out.println(AuthorRepository.getAllAuthors());
+
+        System.out.println("Author with id 1:");
+        System.out.println(AuthorRepository.getAuthorById(1));
+
+        System.out.println("All librarians in the database:");
+        System.out.println(LibrarianRepository.getAllLibrarians());
+
+        System.out.println("All staff in the database:");
+        System.out.println(StaffRepository.getAllStaff());
+
+        AddressRepository.addAddress(new Address(0,"Romania","012345","Strada Soarelui nr.5","-"));
         AddressRepository.updateAddress(new Address(2,"Bulgaria","123456","Strada Soarelui nr.6","Bloc A5"));
 
-        System.out.println(AddressRepository.getAllAddresses()); //display all addresses
+        System.out.println("All addresses in the database:");
+        System.out.println(AddressRepository.getAllAddresses());
+
+        AddressRepository.deleteAddress(3);
+
+        System.out.println("All addresses in the database after we delete the address with id 3(if it exists):");
+        System.out.println(AddressRepository.getAllAddresses());
+
         DatabaseConfiguration.closeDatabaseConnection();
 
     }
