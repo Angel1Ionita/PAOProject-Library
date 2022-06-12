@@ -10,8 +10,11 @@ import java.util.List;
 
 
 public class Write {
-    private static final String mainPath = "src/com/library/database/";
+    private static final String mainPath = "src/main/java/com/library/database/";
     public static PrintWriter addressesWriter, authorsWriter, librariansWriter, staffWriter;
+
+    private Write() {
+    }
 
     static {
         try {
@@ -57,8 +60,8 @@ public class Write {
         return null;
     }
 
-    public static <T> void toCSVFile(List<T> list,Class<T> cls, PrintWriter buffer) {
-        if(cls==Address.class)
+    public static <T> void toCSVFile(List<T> list, Class<T> cls, PrintWriter buffer) {
+        if (cls == Address.class)
             buffer.println("id,country,postalCode,street,details");
         else if (cls == Author.class)
             buffer.println("id,firstName,lastName");
@@ -66,7 +69,7 @@ public class Write {
             buffer.println("id,FirstName,lastName,phone,salary,hireDate,experience");
         else if (cls == Staff.class)
             buffer.println("id,FirstName,lastName,phone,salary,hireDate");
-        list.stream().map(elem -> toCSVline(elem,cls)).forEach(buffer::println);
+        list.stream().map(elem -> toCSVline(elem, cls)).forEach(buffer::println);
         buffer.flush();
     }
 }

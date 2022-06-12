@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.Date;
 
 public class Audit {
-    private static final File file = new File("src/com/library/database/Audit.csv");
+    private static final File file = new File("src/main/java/com/library/database/Audit.csv");
     public static PrintWriter auditFile;
 
     static {
